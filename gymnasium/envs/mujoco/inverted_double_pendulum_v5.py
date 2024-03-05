@@ -1,3 +1,5 @@
+from typing import Optional
+
 __credits__ = ["Kallinteris-Andreas"]
 
 from typing import Dict, Union
@@ -165,11 +167,12 @@ class InvertedDoublePendulumEnv(MujocoEnv, utils.EzPickle):
         self,
         xml_file: str = "inverted_double_pendulum.xml",
         frame_skip: int = 5,
-        default_camera_config: Dict[str, Union[float, int]] = {},
+        default_camera_config: Optional[Dict[str, Union[float, int]]] = None,
         healthy_reward: float = 10.0,
         reset_noise_scale: float = 0.1,
         **kwargs,
     ):
+        default_camera_config = {} if default_camera_config is None else default_camera_config
         utils.EzPickle.__init__(self, xml_file, frame_skip, reset_noise_scale, **kwargs)
 
         self._healthy_reward = healthy_reward
