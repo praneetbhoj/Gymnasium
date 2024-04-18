@@ -177,7 +177,7 @@ class EnvSpec:
         """
         parsed_env_spec = json.loads(json_env_spec)
 
-        applied_wrapper_specs: list[WrapperSpec] = []
+        applied_wrapper_specs: list[WrapperSpec] = field(default_factory=list)
         for wrapper_spec_json in parsed_env_spec.pop("additional_wrappers"):
             try:
                 applied_wrapper_specs.append(WrapperSpec(**wrapper_spec_json))
@@ -229,7 +229,7 @@ class EnvSpec:
             output += f"\ndisable_env_checker={self.disable_env_checker}"
 
         if print_all or self.additional_wrappers:
-            wrapper_output: list[str] = []
+            wrapper_output: list[str] = field(default_factory=list)
             for wrapper_spec in self.additional_wrappers:
                 if include_entry_points:
                     wrapper_output.append(
