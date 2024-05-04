@@ -6,6 +6,7 @@ import numpy as np
 import gymnasium as gym
 from gymnasium import spaces
 from gymnasium.error import DependencyNotInstalled
+import math
 
 
 def cmp(a, b):
@@ -186,7 +187,7 @@ class BlackjackEnv(gym.Env):
                 not self.sab
                 and self.natural
                 and is_natural(self.player)
-                and reward == 1.0
+                and math.isclose(reward, 1.0, rel_tol=1e-09, abs_tol=0.0)
             ):
                 # Natural gives extra points, but doesn't autowin. Legacy implementation
                 reward = 1.5

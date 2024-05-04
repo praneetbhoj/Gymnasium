@@ -332,7 +332,7 @@ class BlackjackFunctional(
 
         # in the natural setting, if the player wins with a natural blackjack, then reward is 1.5
         if params.natural and not params.sutton_and_barto:
-            condition = jnp.logical_and(is_natural(player_hand), (reward == 1))
+            condition = jnp.logical_and(is_natural(player_hand), math.isclose(reward, 1, rel_tol=1e-09, abs_tol=0.0))
             reward = reward * jnp.logical_not(condition) + 1.5 * condition
 
         # in the sutton and barto setting, if the player gets a natural blackjack and the dealer gets
