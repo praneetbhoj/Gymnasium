@@ -41,8 +41,6 @@ and returns five variables:
 """
 from __future__ import annotations
 
-import random
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -52,6 +50,7 @@ import torch.nn as nn
 from torch.distributions.normal import Normal
 
 import gymnasium as gym
+import secrets
 
 
 plt.rcParams["figure.figsize"] = (10, 5)
@@ -255,7 +254,7 @@ rewards_over_seeds = []
 for seed in [1, 2, 3, 5, 8]:  # Fibonacci seeds
     # set seed
     torch.manual_seed(seed)
-    random.seed(seed)
+    secrets.SystemRandom().seed(seed)
     np.random.seed(seed)
 
     # Reinitialize agent every seed
